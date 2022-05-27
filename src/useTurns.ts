@@ -1,15 +1,14 @@
 import { useCallback } from "react";
 import useInterval from "use-interval";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 
 import { playerIntentState, playerPositionState } from "./atoms";
-import usePlayerIntent from "./usePlayerIntent";
 
 import type { Direction } from "./types";
 
 const useTurns = () => {
   const setPlayerPosition = useSetRecoilState(playerPositionState(0));
-  const { resetPlayerIntent } = usePlayerIntent();
+  const resetPlayerIntent = useResetRecoilState(playerIntentState(0));
   const playerIntent = useRecoilValue(playerIntentState(0));
 
   const movePlayer = useCallback((direction: Direction) => {

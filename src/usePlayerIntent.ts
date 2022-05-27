@@ -10,10 +10,6 @@ const usePlayerIntent = () => {
   useHotkeys("down", () => setPlayerIntent("down"));
   useHotkeys("right", () => setPlayerIntent("right"));
   useHotkeys("left", () => setPlayerIntent("left"));
-
-  const resetPlayerIntent = useCallback(() => setPlayerIntent(null), []);
-
-  return { resetPlayerIntent };
 };
 
 export default usePlayerIntent;
