@@ -6,7 +6,7 @@ import Grid from "./Grid";
 function App() {
   return (
     <div className="App">
-      <Grid />
+      <Grid playerPosition={{ x: 0, y: 2 }} />
     </div>
   );
 }
