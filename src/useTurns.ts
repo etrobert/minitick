@@ -1,39 +1,39 @@
 import { useCallback } from "react";
 import useInterval from "use-interval";
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilTransaction_UNSTABLE } from "recoil";
 
 import { playerIntentState, playerPositionState } from "./atoms";
 
-import type { Direction } from "./types";
+import type { Direction, Position } from "./types";
+
+const movePosition = ({ x, y }: Position, direction: Direction) => {
+  switch (direction) {
+    case "up":
+      return { x, y: y - 1 };
+    case "down":
+      return { x, y: y + 1 };
+    case "right":
+      return { x: x + 1, y };
+    case "left":
+      return { x: x - 1, y };
+  }
+};
 
 const useTurns = () => {
-  const setPlayerPosition = useSetRecoilState(playerPositionState(0));
-  const resetPlayerIntent = useResetRecoilState(playerIntentState(0));
-  const playerIntent = useRecoilValue(playerIntentState(0));
+  const takeTurn = useRecoilTransaction_UNSTABLE(
+    ({ set, get, reset }) =>
+      (player: number) => {
+        const intent = get(playerIntentState(player));
+        if (intent === null) return;
+        set(playerPositionState(player), (position) =>
+          movePosition(position, intent)
+        );
+        reset(playerIntentState(player));
+      },
+    []
+  );
 
-  const movePlayer = useCallback((direction: Direction) => {
-    switch (direction) {
-      case "up":
-        setPlayerPosition(({ x, y }) => ({ x, y: y - 1 }));
-        break;
-      case "down":
-        setPlayerPosition(({ x, y }) => ({ x, y: y + 1 }));
-        break;
-      case "right":
-        setPlayerPosition(({ x, y }) => ({ x: x + 1, y }));
-        break;
-      case "left":
-        setPlayerPosition(({ x, y }) => ({ x: x - 1, y }));
-        break;
-    }
-  }, []);
-
-  const takeTurn = useCallback(() => {
-    if (playerIntent === null) return;
-    movePlayer(playerIntent);
-    resetPlayerIntent();
-  }, [playerIntent, resetPlayerIntent]);
-  useInterval(takeTurn, 1000);
+  useInterval(() => takeTurn(0), 1000);
 };
 
 export default useTurns;
