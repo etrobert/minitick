@@ -4,7 +4,7 @@ import "./Grid.css";
 
 const size = 4;
 const cells = range(size)
-  .map((x) => range(size).map((y) => ({ x, y })))
+  .map((y) => range(size).map((x) => ({ x, y })))
   .flat();
 
 type Position = {
