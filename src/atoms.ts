@@ -6,4 +6,9 @@ const playerIntentState = atom<Direction | null>({
   default: null,
 });
 
-export { playerIntentState };
+const playerPositionState = atom({
+  key: "playerPosition",
+  default: { x: 0, y: 0 },
+});
+
+export { playerIntentState, playerPositionState };

@@ -4,12 +4,12 @@ import Header from "./Header";
 import usePlayerPosition from "./usePlayerPosition";
 
 function App() {
-  const playerPosition = usePlayerPosition();
+  usePlayerPosition();
 
   return (
     <div className="App">
       <Header />
-      <Grid playerPosition={playerPosition} />
+      <Grid />
     </div>
   );
 }
