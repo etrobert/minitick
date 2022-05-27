@@ -1,4 +1,4 @@
-import { atom, atomFamily } from "recoil";
+import { atom, atomFamily, selector } from "recoil";
 
 import type { Direction, PlayerId, Position } from "./types";
 
@@ -14,4 +14,14 @@ const playerPositionState = atomFamily<Position, PlayerId>({
 
 const playersState = atom<PlayerId[]>({ key: "players", default: [0] });
 
-export { playerIntentState, playerPositionState, playersState };
+const playersPositionsState = selector({
+  key: "playersPositions",
+  get: ({ get }) => get(playersState).map((id) => get(playerPositionState(id))),
+});
+
+export {
+  playerIntentState,
+  playerPositionState,
+  playersState,
+  playersPositionsState,
+};

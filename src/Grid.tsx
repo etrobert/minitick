@@ -1,7 +1,7 @@
 import range from "lodash/range";
 import { useRecoilValue } from "recoil";
 
-import { playerPositionState } from "./atoms";
+import { playersPositionsState } from "./atoms";
 
 import type { Position } from "./types";
 
@@ -16,7 +16,7 @@ const equalPositions = (p1: Position, p2: Position) =>
   p1.x === p2.x && p1.y === p2.y;
 
 const Grid = () => {
-  const playerPosition = useRecoilValue(playerPositionState(0));
+  const playersPositions = useRecoilValue(playersPositionsState);
 
   return (
     <div className="Grid">
@@ -26,7 +26,9 @@ const Grid = () => {
           style={{
             width: "3rem",
             height: "3rem",
-            backgroundColor: equalPositions(playerPosition, cell)
+            backgroundColor: playersPositions.some((playerPosition) =>
+              equalPositions(playerPosition, cell)
+            )
               ? "lightblue"
               : "pink",
           }}
