@@ -1,10 +1,13 @@
 import { useCallback, useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
+import useInterval from "use-interval";
 
-type Direction = "up" | "down" | "right" | "left";
+import usePlayerIntent from "./usePlayerIntent";
+
+import type { Direction } from "./types";
 
 const usePlayerPosition = () => {
   const [playerPosition, setPlayerPosition] = useState({ x: 0, y: 3 });
+  const playerIntent = usePlayerIntent();
 
   const movePlayer = useCallback((direction: Direction) => {
     switch (direction) {
@@ -23,10 +26,11 @@ const usePlayerPosition = () => {
     }
   }, []);
 
-  useHotkeys("up", () => movePlayer("up"));
-  useHotkeys("down", () => movePlayer("down"));
-  useHotkeys("right", () => movePlayer("right"));
-  useHotkeys("left", () => movePlayer("left"));
+  const takeTurn = useCallback(
+    () => playerIntent !== null && movePlayer(playerIntent),
+    [playerIntent]
+  );
+  useInterval(takeTurn, 1000);
 
   return playerPosition;
 };
