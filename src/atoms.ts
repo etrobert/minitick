@@ -1,4 +1,4 @@
-import { atomFamily } from "recoil";
+import { atom, atomFamily } from "recoil";
 
 import type { Direction, Position } from "./types";
 
@@ -14,4 +14,6 @@ const playerPositionState = atomFamily<Position, PlayerId>({
   default: { x: 0, y: 0 },
 });
 
-export { playerIntentState, playerPositionState };
+const playersState = atom<PlayerId[]>({ key: "players", default: [0] });
+
+export { playerIntentState, playerPositionState, playersState };

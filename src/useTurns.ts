@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import useInterval from "use-interval";
-import { useRecoilTransaction_UNSTABLE } from "recoil";
+import { useRecoilTransaction_UNSTABLE, useRecoilValue } from "recoil";
 
-import { playerIntentState, playerPositionState } from "./atoms";
+import { playerIntentState, playerPositionState, playersState } from "./atoms";
 
 import type { Direction, Position } from "./types";
 
@@ -33,7 +33,9 @@ const useTurns = () => {
     []
   );
 
-  useInterval(() => takeTurn(0), 1000);
+  const players = useRecoilValue(playersState);
+
+  useInterval(() => players.forEach(takeTurn), 1000);
 };
 
 export default useTurns;
