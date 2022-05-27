@@ -12,7 +12,7 @@ const playerPositionState = atomFamily<Position, PlayerId>({
   default: { x: 0, y: 0 },
 });
 
-const playersState = atom<PlayerId[]>({ key: "players", default: [0] });
+const playersState = atom<PlayerId[]>({ key: "players", default: [0, 1] });
 
 const playersPositionsState = selector({
   key: "playersPositions",
