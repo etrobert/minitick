@@ -1,5 +1,7 @@
 import range from "lodash/range";
 
+import './Grid.css'
+
 const size = 4;
 const cells = range(size * size);
 
