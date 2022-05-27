@@ -10,7 +10,10 @@ const cells = range(size)
 const Grid = () => (
   <div className="Grid">
     {cells.map((cell, i) => (
-      <div key={i} style={{ width: 30, height: 30, backgroundColor: "pink" }}>
+      <div
+        key={i}
+        style={{ width: "3rem", height: "3rem", backgroundColor: "pink" }}
+      >
         {`${cell.x}, ${cell.y}`}
       </div>
     ))}
