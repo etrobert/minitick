@@ -1,10 +1,10 @@
 import "./App.css";
 import Grid from "./Grid";
 import Header from "./Header";
-import usePlayerPosition from "./usePlayerPosition";
+import useTurns from "./useTurns";
 
 function App() {
-  usePlayerPosition();
+  useTurns();
 
   return (
     <div className="App">

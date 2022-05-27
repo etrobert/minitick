@@ -7,7 +7,7 @@ import usePlayerIntent from "./usePlayerIntent";
 
 import type { Direction } from "./types";
 
-const usePlayerPosition = () => {
+const useTurns = () => {
   const setPlayerPosition = useSetRecoilState(playerPositionState);
   const { playerIntent, resetPlayerIntent } = usePlayerIntent();
 
@@ -36,4 +36,4 @@ const usePlayerPosition = () => {
   useInterval(takeTurn, 1000);
 };
 
-export default usePlayerPosition;
+export default useTurns;
