@@ -5,4 +5,6 @@ type Position = {
   y: number;
 };
 
-export type { Direction, Position };
+type PlayerId = number;
+
+export type { Direction, Position, PlayerId };

@@ -1,8 +1,6 @@
 import { atom, atomFamily } from "recoil";
 
-import type { Direction, Position } from "./types";
-
-type PlayerId = number;
+import type { Direction, PlayerId, Position } from "./types";
 
 const playerIntentState = atomFamily<Direction | null, PlayerId>({
   key: "playerIntent",

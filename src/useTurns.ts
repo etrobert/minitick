@@ -4,7 +4,7 @@ import { useRecoilTransaction_UNSTABLE, useRecoilValue } from "recoil";
 
 import { playerIntentState, playerPositionState, playersState } from "./atoms";
 
-import type { Direction, Position } from "./types";
+import type { Direction, PlayerId, Position } from "./types";
 
 const movePosition = ({ x, y }: Position, direction: Direction) => {
   switch (direction) {
@@ -22,7 +22,7 @@ const movePosition = ({ x, y }: Position, direction: Direction) => {
 const useTurns = () => {
   const takeTurn = useRecoilTransaction_UNSTABLE(
     ({ set, get, reset }) =>
-      (player: number) => {
+      (player: PlayerId) => {
         const intent = get(playerIntentState(player));
         if (intent === null) return;
         set(playerPositionState(player), (position) =>
