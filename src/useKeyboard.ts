@@ -1,9 +1,9 @@
-import { useCallback } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useSetRecoilState } from "recoil";
+
 import { playerIntentState } from "./atoms";
 
-const usePlayerIntent = () => {
+const useKeyboard = () => {
   const setPlayerIntent = useSetRecoilState(playerIntentState(0));
 
   useHotkeys("up", () => setPlayerIntent("up"));
@@ -12,4 +12,4 @@ const usePlayerIntent = () => {
   useHotkeys("left", () => setPlayerIntent("left"));
 };
 
-export default usePlayerIntent;
+export default useKeyboard;

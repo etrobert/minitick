@@ -1,12 +1,12 @@
 import "./App.css";
 import Grid from "./Grid";
 import Header from "./Header";
-import usePlayerIntent from "./usePlayerIntent";
+import useKeyboard from "./useKeyboard";
 import useTurns from "./useTurns";
 
 function App() {
   useTurns();
-  usePlayerIntent();
+  useKeyboard();
 
   return (
     <div className="App">
