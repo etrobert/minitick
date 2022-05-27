@@ -9,7 +9,7 @@ const emojis = {
 };
 
 const Header = () => {
-  const playerIntent = useRecoilValue(playerIntentState);
+  const playerIntent = useRecoilValue(playerIntentState(0));
 
   return (
     <div className="Header">{`Player: ${

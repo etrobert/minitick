@@ -1,7 +1,9 @@
-import { atom } from "recoil";
+import { atom, atomFamily } from "recoil";
 import { Direction } from "./types";
 
-const playerIntentState = atom<Direction | null>({
+type PlayerId = number;
+
+const playerIntentState = atomFamily<Direction | null, PlayerId>({
   key: "playerIntent",
   default: null,
 });

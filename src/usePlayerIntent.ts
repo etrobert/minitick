@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { playerIntentState } from "./atoms";
 
 const usePlayerIntent = () => {
-  const [playerIntent, setPlayerIntent] = useRecoilState(playerIntentState);
+  const [playerIntent, setPlayerIntent] = useRecoilState(playerIntentState(0));
 
   useHotkeys("up", () => setPlayerIntent("up"));
   useHotkeys("down", () => setPlayerIntent("down"));
