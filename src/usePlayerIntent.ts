@@ -1,10 +1,10 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-
-import type { Direction } from "./types";
+import { useRecoilState } from "recoil";
+import { playerIntentState } from "./atoms";
 
 const usePlayerIntent = () => {
-  const [playerIntent, setPlayerIntent] = useState<Direction | null>(null);
+  const [playerIntent, setPlayerIntent] = useRecoilState(playerIntentState);
 
   useHotkeys("up", () => setPlayerIntent("up"));
   useHotkeys("down", () => setPlayerIntent("down"));
