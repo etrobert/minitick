@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 import type { Direction } from "./types";
@@ -11,7 +11,9 @@ const usePlayerIntent = () => {
   useHotkeys("right", () => setPlayerIntent("right"));
   useHotkeys("left", () => setPlayerIntent("left"));
 
-  return playerIntent;
+  const resetPlayerIntent = useCallback(() => setPlayerIntent(null), []);
+
+  return { playerIntent, resetPlayerIntent };
 };
 
 export default usePlayerIntent;

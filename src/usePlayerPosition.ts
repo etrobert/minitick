@@ -7,7 +7,7 @@ import type { Direction } from "./types";
 
 const usePlayerPosition = () => {
   const [playerPosition, setPlayerPosition] = useState({ x: 0, y: 3 });
-  const playerIntent = usePlayerIntent();
+  const { playerIntent, resetPlayerIntent } = usePlayerIntent();
 
   const movePlayer = useCallback((direction: Direction) => {
     switch (direction) {
@@ -26,10 +26,11 @@ const usePlayerPosition = () => {
     }
   }, []);
 
-  const takeTurn = useCallback(
-    () => playerIntent !== null && movePlayer(playerIntent),
-    [playerIntent]
-  );
+  const takeTurn = useCallback(() => {
+    if (playerIntent === null) return;
+    movePlayer(playerIntent);
+    resetPlayerIntent();
+  }, [playerIntent, resetPlayerIntent]);
   useInterval(takeTurn, 1000);
 
   return playerPosition;
