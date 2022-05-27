@@ -8,7 +8,7 @@ import usePlayerIntent from "./usePlayerIntent";
 import type { Direction } from "./types";
 
 const useTurns = () => {
-  const setPlayerPosition = useSetRecoilState(playerPositionState);
+  const setPlayerPosition = useSetRecoilState(playerPositionState(0));
   const { playerIntent, resetPlayerIntent } = usePlayerIntent();
 
   const movePlayer = useCallback((direction: Direction) => {

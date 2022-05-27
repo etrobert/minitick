@@ -1,3 +1,8 @@
 type Direction = "up" | "down" | "right" | "left";
 
-export type { Direction };
+type Position = {
+  x: number;
+  y: number;
+};
+
+export type { Direction, Position };

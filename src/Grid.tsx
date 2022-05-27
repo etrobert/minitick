@@ -3,6 +3,8 @@ import { useRecoilValue } from "recoil";
 
 import { playerPositionState } from "./atoms";
 
+import type { Position } from "./types";
+
 import "./Grid.css";
 
 const size = 4;
@@ -10,16 +12,11 @@ const cells = range(size)
   .map((y) => range(size).map((x) => ({ x, y })))
   .flat();
 
-type Position = {
-  x: number;
-  y: number;
-};
-
 const equalPositions = (p1: Position, p2: Position) =>
   p1.x === p2.x && p1.y === p2.y;
 
 const Grid = () => {
-  const playerPosition = useRecoilValue(playerPositionState);
+  const playerPosition = useRecoilValue(playerPositionState(0));
 
   return (
     <div className="Grid">
