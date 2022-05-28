@@ -1,20 +1,22 @@
 import useInterval from "use-interval";
 import { useRecoilTransaction_UNSTABLE, useRecoilValue } from "recoil";
 
+import { gridSize } from "./constants";
 import { playerIntentState, playerPositionState, playersState } from "./atoms";
 
 import type { Direction, PlayerId, Position } from "./types";
 
-const movePosition = ({ x, y }: Position, direction: Direction) => {
+const movePosition = (position: Position, direction: Direction) => {
+  const { x, y } = position;
   switch (direction) {
     case "up":
-      return { x, y: y - 1 };
+      return y === 0 ? position : { x, y: y - 1 };
     case "down":
-      return { x, y: y + 1 };
+      return y === gridSize - 1 ? position : { x, y: y + 1 };
     case "right":
-      return { x: x + 1, y };
+      return x === gridSize - 1 ? position : { x: x + 1, y };
     case "left":
-      return { x: x - 1, y };
+      return x === 0 ? position : { x: x - 1, y };
   }
 };
 

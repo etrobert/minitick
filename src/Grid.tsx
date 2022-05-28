@@ -1,15 +1,15 @@
 import range from "lodash/range";
 import { useRecoilValue } from "recoil";
 
+import { gridSize } from "./constants";
 import { playersPositionsState } from "./atoms";
 
 import type { Position } from "./types";
 
 import "./Grid.css";
 
-const size = 4;
-const cells = range(size)
-  .map((y) => range(size).map((x) => ({ x, y })))
+const cells = range(gridSize)
+  .map((y) => range(gridSize).map((x) => ({ x, y })))
   .flat();
 
 const equalPositions = (p1: Position, p2: Position) =>
