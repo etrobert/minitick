@@ -33,7 +33,7 @@ const Grid = () => {
               : "pink",
           }}
         >
-          {`${cell.x}, ${cell.y}`}
+          {/* {`${cell.x}, ${cell.y}`} */}
         </div>
       ))}
     </div>
