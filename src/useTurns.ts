@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import useInterval from "use-interval";
 import { useRecoilTransaction_UNSTABLE, useRecoilValue } from "recoil";
 
