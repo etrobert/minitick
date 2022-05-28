@@ -3,6 +3,7 @@
   text-align: center;
   display: grid;
   place-items: center;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
 .App-logo {
