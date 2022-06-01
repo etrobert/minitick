@@ -7,9 +7,7 @@ type Props = {
 };
 
 const Cell = ({ playerId }: Props) => (
-  <div className="Cell" data-player-id={playerId}>
-    {/* {`${cell.x}, ${cell.y}`} */}
-  </div>
+  <div className="Cell" data-player-id={playerId} />
 );
 
 export default Cell;
