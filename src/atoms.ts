@@ -2,9 +2,9 @@ import { atom, atomFamily, selector } from "recoil";
 
 import type { Direction, PlayerId, Position } from "./types";
 
-const playerIntentState = atomFamily<Direction | null, PlayerId>({
-  key: "playerIntent",
-  default: null,
+const playerIntentsState = atomFamily<Direction[], PlayerId>({
+  key: "playerIntents",
+  default: [],
 });
 
 const playerPositionState = atomFamily<Position, PlayerId>({
@@ -24,7 +24,7 @@ const playersPositionsState = selector({
 });
 
 export {
-  playerIntentState,
+  playerIntentsState,
   playerPositionState,
   playersState,
   playersPositionsState,

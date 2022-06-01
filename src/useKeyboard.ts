@@ -1,15 +1,14 @@
 import { useHotkeys } from "react-hotkeys-hook";
-import { useSetRecoilState } from "recoil";
 
-import { playerIntentState } from "./atoms";
+import useAddPlayerIntent from "./useAddPlayerIntent";
 
 const useKeyboard = () => {
-  const setPlayerIntent = useSetRecoilState(playerIntentState(0));
+  const addPlayerIntent = useAddPlayerIntent(0);
 
-  useHotkeys("up", () => setPlayerIntent("up"));
-  useHotkeys("down", () => setPlayerIntent("down"));
-  useHotkeys("right", () => setPlayerIntent("right"));
-  useHotkeys("left", () => setPlayerIntent("left"));
+  useHotkeys("up", () => addPlayerIntent("up"));
+  useHotkeys("down", () => addPlayerIntent("down"));
+  useHotkeys("right", () => addPlayerIntent("right"));
+  useHotkeys("left", () => addPlayerIntent("left"));
 };
 
 export default useKeyboard;

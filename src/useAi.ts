@@ -1,7 +1,8 @@
-import { useSetRecoilState } from "recoil";
 import useInterval from "use-interval";
-import { playerIntentState } from "./atoms";
-import { PlayerId } from "./types";
+
+import useAddPlayerIntent from "./useAddPlayerIntent";
+
+import type { PlayerId } from "./types";
 
 const directions = ["up", "down", "left", "right"] as const;
 
@@ -13,8 +14,8 @@ const randomElement = <T>(array: readonly T[]) =>
 const randomIntent = () => randomElement(directions);
 
 const useAi = (playerId: PlayerId) => {
-  const setIntent = useSetRecoilState(playerIntentState(playerId));
-  useInterval(() => setIntent(randomIntent()), 1000);
+  const addPlayerIntent = useAddPlayerIntent(playerId);
+  useInterval(() => addPlayerIntent(randomIntent()), 1000);
 };
 
 export default useAi;
