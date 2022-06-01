@@ -1,0 +1,13 @@
+.Cell {
+  width: 3rem;
+  height: 3rem;
+  background-color: pink;
+}
+
+.Cell[data-player-id="0"] {
+  background-color: lightblue;
+}
+
+.Cell[data-player-id="1"] {
+  background-color: lightgray;
+}
