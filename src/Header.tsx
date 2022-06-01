@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 
 import { playerIntentsState, playersState } from "./atoms";
 
-import type { Direction, PlayerId } from "./types";
+import type { PlayerId } from "./types";
 
 const emojis = {
   up: "⬆️",
@@ -11,18 +11,13 @@ const emojis = {
   left: "⬅️",
 };
 
-const PlayerIntent = ({ playerIntent }: { playerIntent: Direction }) => {
-  return <div>{`${playerIntent === null ? "❌" : emojis[playerIntent]}`}</div>;
-};
-
 const PlayerIntents = ({ playerId }: { playerId: PlayerId }) => {
   const playerIntents = useRecoilValue(playerIntentsState(playerId));
   return (
     <div>
-      {`Player ${playerId}`}
-      {playerIntents.map((intent, index) => (
-        <PlayerIntent playerIntent={intent} key={index} />
-      ))}
+      {`Player ${playerId}: `}
+      {playerIntents.length === 0 && "❌"}
+      {playerIntents.map((intent) => emojis[intent])}
     </div>
   );
 };
