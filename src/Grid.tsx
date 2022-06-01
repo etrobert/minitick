@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 
 import { gridSize } from "./constants";
 import { playersPositionsState } from "./atoms";
+import Cell from "./Cell";
 
 import type { Position } from "./types";
 
@@ -21,20 +22,12 @@ const Grid = () => {
   return (
     <div className="Grid">
       {cells.map((cell, i) => (
-        <div
+        <Cell
           key={i}
-          style={{
-            width: "3rem",
-            height: "3rem",
-            backgroundColor: playersPositions.some((playerPosition) =>
-              equalPositions(playerPosition, cell)
-            )
-              ? "lightblue"
-              : "pink",
-          }}
-        >
-          {/* {`${cell.x}, ${cell.y}`} */}
-        </div>
+          isPlayer={playersPositions.some((playerPosition) =>
+            equalPositions(playerPosition, cell)
+          )}
+        />
       ))}
     </div>
   );
