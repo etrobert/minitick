@@ -16,7 +16,11 @@ const playersState = atom<PlayerId[]>({ key: "players", default: [0, 1] });
 
 const playersPositionsState = selector({
   key: "playersPositions",
-  get: ({ get }) => get(playersState).map((id) => get(playerPositionState(id))),
+  get: ({ get }) =>
+    get(playersState).map((id) => ({
+      id,
+      position: get(playerPositionState(id)),
+    })),
 });
 
 export {

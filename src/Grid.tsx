@@ -24,9 +24,11 @@ const Grid = () => {
       {cells.map((cell, i) => (
         <Cell
           key={i}
-          isPlayer={playersPositions.some((playerPosition) =>
-            equalPositions(playerPosition, cell)
-          )}
+          playerId={
+            playersPositions.find(({ position }) =>
+              equalPositions(position, cell)
+            )?.id
+          }
         />
       ))}
     </div>
