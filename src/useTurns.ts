@@ -3,6 +3,7 @@ import { useRecoilTransaction_UNSTABLE, useRecoilValue } from "recoil";
 
 import { gridSize } from "./constants";
 import { playerIntentsState, playerPositionState, playersState } from "./atoms";
+import { adjacent } from "./helpers";
 
 import type { Direction, PlayerId, Position } from "./types";
 
@@ -25,11 +26,20 @@ const useTurns = () => {
     ({ set, get }) =>
       (player: PlayerId) => {
         const playerIntents = get(playerIntentsState(player));
+        const playerPosition = get(playerPositionState(player));
         if (playerIntents.length === 0) return;
         const intent = playerIntents[0];
-        set(playerPositionState(player), (position) =>
-          movePosition(position, intent)
-        );
+        if (intent === "hit") {
+          if (
+            get(playersState)
+              .map((playerId) => get(playerPositionState(playerId)))
+              .some((position) => adjacent(playerPosition, position))
+          )
+            console.log("HIT");
+        } else
+          set(playerPositionState(player), (position) =>
+            movePosition(position, intent)
+          );
         set(playerIntentsState(player), ([_, ...rest]) => rest);
       },
     []

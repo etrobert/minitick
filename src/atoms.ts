@@ -1,8 +1,8 @@
 import { atom, atomFamily, selector } from "recoil";
 
-import type { Direction, PlayerId, Position } from "./types";
+import type { Action, PlayerId, Position } from "./types";
 
-const playerIntentsState = atomFamily<Direction[], PlayerId>({
+const playerIntentsState = atomFamily<Action[], PlayerId>({
   key: "playerIntents",
   default: [],
 });

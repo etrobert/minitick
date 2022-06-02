@@ -1,5 +1,7 @@
 type Direction = "up" | "down" | "right" | "left";
 
+type Action = Direction | "hit";
+
 type Position = {
   x: number;
   y: number;
@@ -7,4 +9,4 @@ type Position = {
 
 type PlayerId = number;
 
-export type { Direction, Position, PlayerId };
+export type { Direction, Action, Position, PlayerId };

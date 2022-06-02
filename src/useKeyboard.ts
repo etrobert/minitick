@@ -9,6 +9,7 @@ const useKeyboard = () => {
   useHotkeys("down", () => addPlayerIntent("down"));
   useHotkeys("right", () => addPlayerIntent("right"));
   useHotkeys("left", () => addPlayerIntent("left"));
+  useHotkeys("space", () => addPlayerIntent("hit"));
 };
 
 export default useKeyboard;

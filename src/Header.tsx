@@ -9,6 +9,7 @@ const emojis = {
   down: "⬇️",
   right: "➡️",
   left: "⬅️",
+  hit: "💥",
 };
 
 const PlayerIntents = ({ playerId }: { playerId: PlayerId }) => {

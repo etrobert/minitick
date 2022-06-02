@@ -3,14 +3,13 @@ import { useSetRecoilState } from "recoil";
 
 import { playerIntentsState } from "./atoms";
 
-import type { Direction, PlayerId } from "./types";
+import type { Action, PlayerId } from "./types";
 
 const useAddPlayerIntent = (playerId: PlayerId) => {
   const setPlayerIntents = useSetRecoilState(playerIntentsState(playerId));
 
   const addPlayerIntent = useCallback(
-    (direction: Direction) =>
-      setPlayerIntents((intents) => [...intents, direction]),
+    (action: Action) => setPlayerIntents((intents) => [...intents, action]),
     [setPlayerIntents]
   );
 
