@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/minitick/static/css/main.c2811a3b.css",
-    "main.js": "/minitick/static/js/main.9721e4af.js",
+    "main.css": "/minitick/static/css/main.82526bb3.css",
+    "main.js": "/minitick/static/js/main.1f350205.js",
     "index.html": "/minitick/index.html",
-    "main.c2811a3b.css.map": "/minitick/static/css/main.c2811a3b.css.map",
-    "main.9721e4af.js.map": "/minitick/static/js/main.9721e4af.js.map"
+    "main.82526bb3.css.map": "/minitick/static/css/main.82526bb3.css.map",
+    "main.1f350205.js.map": "/minitick/static/js/main.1f350205.js.map"
   },
   "entrypoints": [
-    "static/css/main.c2811a3b.css",
-    "static/js/main.9721e4af.js"
+    "static/css/main.82526bb3.css",
+    "static/js/main.1f350205.js"
   ]
 }
