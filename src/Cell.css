@@ -4,6 +4,10 @@
   background-color: pink;
 }
 
+.Cell[data-hit="true"] {
+  background-color: blanchedalmond;
+}
+
 .Cell[data-player-id="0"] {
   background-color: lightblue;
 }

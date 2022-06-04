@@ -12,6 +12,11 @@ const playerPositionState = atomFamily<Position, PlayerId>({
   default: { x: 0, y: 0 },
 });
 
+const hitPositionState = atom<Position | null>({
+  key: "hitPosition",
+  default: null,
+});
+
 const playersState = atom<PlayerId[]>({ key: "players", default: [0, 1] });
 
 const playersPositionsState = selector({
@@ -28,4 +33,5 @@ export {
   playerPositionState,
   playersState,
   playersPositionsState,
+  hitPositionState,
 };

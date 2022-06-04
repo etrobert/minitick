@@ -2,8 +2,9 @@ import range from "lodash/range";
 import { useRecoilValue } from "recoil";
 
 import { gridSize } from "./constants";
-import { playersPositionsState } from "./atoms";
+import { hitPositionState, playersPositionsState } from "./atoms";
 import Cell from "./Cell";
+import { adjacent } from "./helpers";
 
 import type { Position } from "./types";
 
@@ -18,6 +19,7 @@ const equalPositions = (p1: Position, p2: Position) =>
 
 const Grid = () => {
   const playersPositions = useRecoilValue(playersPositionsState);
+  const hitPosition = useRecoilValue(hitPositionState);
 
   return (
     <div className="Grid">
@@ -29,6 +31,7 @@ const Grid = () => {
               equalPositions(position, cell)
             )?.id
           }
+          hit={hitPosition !== null && adjacent(cell, hitPosition)}
         />
       ))}
     </div>

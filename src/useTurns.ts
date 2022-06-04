@@ -1,8 +1,17 @@
 import useInterval from "use-interval";
-import { useRecoilTransaction_UNSTABLE, useRecoilValue } from "recoil";
+import {
+  useRecoilTransaction_UNSTABLE,
+  useRecoilValue,
+  useResetRecoilState,
+} from "recoil";
 
 import { gridSize } from "./constants";
-import { playerIntentsState, playerPositionState, playersState } from "./atoms";
+import {
+  hitPositionState,
+  playerIntentsState,
+  playerPositionState,
+  playersState,
+} from "./atoms";
 import { adjacent } from "./helpers";
 
 import type { Direction, PlayerId, Position } from "./types";
@@ -22,6 +31,8 @@ const movePosition = (position: Position, direction: Direction) => {
 };
 
 const useTurns = () => {
+  const resetHitPosition = useResetRecoilState(hitPositionState);
+
   const takeTurn = useRecoilTransaction_UNSTABLE(
     ({ set, get }) =>
       (player: PlayerId) => {
@@ -30,6 +41,7 @@ const useTurns = () => {
         if (playerIntents.length === 0) return;
         const intent = playerIntents[0];
         if (intent === "hit") {
+          set(hitPositionState, playerPosition);
           if (
             get(playersState)
               .map((playerId) => get(playerPositionState(playerId)))
@@ -47,7 +59,10 @@ const useTurns = () => {
 
   const players = useRecoilValue(playersState);
 
-  useInterval(() => players.forEach(takeTurn), 1000);
+  useInterval(() => {
+    resetHitPosition();
+    players.forEach(takeTurn);
+  }, 1000);
 };
 
 export default useTurns;
