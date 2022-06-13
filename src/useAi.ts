@@ -1,6 +1,7 @@
 import useInterval from "use-interval";
 
 import useAddPlayerIntent from "./useAddPlayerIntent";
+import { turnSpeed } from "./constants";
 
 import type { PlayerId } from "./types";
 
@@ -15,7 +16,7 @@ const randomIntent = () => randomElement(directions);
 
 const useAi = (playerId: PlayerId) => {
   const addPlayerIntent = useAddPlayerIntent(playerId);
-  useInterval(() => addPlayerIntent(randomIntent()), 1000);
+  useInterval(() => addPlayerIntent(randomIntent()), turnSpeed);
 };
 
 export default useAi;
