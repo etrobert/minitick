@@ -2,7 +2,7 @@ import useInterval from "use-interval";
 import { useRecoilTransaction_UNSTABLE } from "recoil";
 import { drop } from "lodash";
 
-import { gridSize } from "./constants";
+import { gridSize, turnSpeed } from "./constants";
 import { playerIntentsState, playerPositionState, playersState } from "./atoms";
 
 import type { Action, Direction, PlayerId, Position } from "./types";
@@ -81,7 +81,7 @@ const useTurns = () => {
 
   useInterval(() => {
     recoilProcessTurn();
-  }, 1000);
+  }, turnSpeed);
 };
 
 export default useTurns;
