@@ -15,3 +15,21 @@
 .Cell[data-player-id="1"] {
   background-color: lightgray;
 }
+
+.Cell-error-left {
+  animation: error-left 1s ease-in-out infinite;
+}
+
+@keyframes error-left {
+  0% {
+    transform: translateX(0em);
+  }
+
+  50% {
+    transform: translateX(-2rem);
+  }
+
+  100% {
+    transform: translateX(0em);
+  }
+}

@@ -26,6 +26,7 @@ const Grid = () => {
       {cells.map((cell, i) => (
         <Cell
           key={i}
+          className={i === 1 ? "Cell-error-left" : ""}
           playerId={
             playersPositions.find(({ position }) =>
               equalPositions(position, cell)
