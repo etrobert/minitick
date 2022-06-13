@@ -1,5 +1,6 @@
 import useInterval from "use-interval";
 import { useRecoilTransaction_UNSTABLE } from "recoil";
+import { drop } from "lodash";
 
 import { gridSize } from "./constants";
 import { playerIntentsState, playerPositionState, playersState } from "./atoms";
@@ -74,13 +75,7 @@ const useTurns = () => {
           set(playerPositionState(playerId), position)
         );
 
-        players.forEach((playerId) =>
-          set(playerIntentsState(playerId), (intents) => {
-            if (intents.length === 0) return [];
-            const [_, ...rest] = intents;
-            return rest;
-          })
-        );
+        players.forEach((playerId) => set(playerIntentsState(playerId), drop<Action>));
       }
   );
 
