@@ -1,20 +1,10 @@
 import useInterval from "use-interval";
-import {
-  useRecoilTransaction_UNSTABLE,
-  useRecoilValue,
-  useResetRecoilState,
-} from "recoil";
+import { useRecoilTransaction_UNSTABLE } from "recoil";
 
 import { gridSize } from "./constants";
-import {
-  hitPositionState,
-  playerIntentsState,
-  playerPositionState,
-  playersState,
-} from "./atoms";
-import { adjacent } from "./helpers";
+import { playerIntentsState, playerPositionState, playersState } from "./atoms";
 
-import type { Direction, PlayerId, Position } from "./types";
+import type { Action, Direction, PlayerId, Position } from "./types";
 
 const movePosition = (position: Position, direction: Direction) => {
   const { x, y } = position;
@@ -30,38 +20,72 @@ const movePosition = (position: Position, direction: Direction) => {
   }
 };
 
-const useTurns = () => {
-  const resetHitPosition = useResetRecoilState(hitPositionState);
+const processTurn = (
+  players: PlayerId[],
+  playersIntents: Map<PlayerId, Action[]>,
+  playersPositions: Map<PlayerId, Position>
+) => {
+  const newPlayersPositions = new Map(playersPositions);
 
-  const takeTurn = useRecoilTransaction_UNSTABLE(
+  players.forEach((playerId) => {
+    // We cast away undefined cause we know it exists
+    const playerIntents = playersIntents.get(playerId) as Action[];
+    if (playerIntents.length === 0) return;
+    const playerIntent = playerIntents[0];
+    // TODO: We ignore hits for now
+    if (playerIntent === "hit") return;
+    // We cast away undefined cause we know it exists
+    const playerPosition = playersPositions.get(playerId) as Position;
+    const newPosition = movePosition(playerPosition, playerIntent);
+
+    // TODO: Collisions
+
+    newPlayersPositions.set(playerId, newPosition);
+  });
+
+  return newPlayersPositions;
+};
+
+const useTurns = () => {
+  const recoilProcessTurn = useRecoilTransaction_UNSTABLE(
     ({ set, get }) =>
-      (player: PlayerId) => {
-        const playerIntents = get(playerIntentsState(player));
-        const playerPosition = get(playerPositionState(player));
-        if (playerIntents.length === 0) return;
-        const intent = playerIntents[0];
-        if (intent === "hit") {
-          set(hitPositionState, playerPosition);
-          if (
-            get(playersState)
-              .map((playerId) => get(playerPositionState(playerId)))
-              .some((position) => adjacent(playerPosition, position))
-          )
-            console.log("HIT");
-        } else
-          set(playerPositionState(player), (position) =>
-            movePosition(position, intent)
-          );
-        set(playerIntentsState(player), ([_, ...rest]) => rest);
-      },
-    []
+      () => {
+        const players = get(playersState);
+        const playersPositions = new Map(
+          players.map((playerId) => [
+            playerId,
+            get(playerPositionState(playerId)),
+          ])
+        );
+        const playersIntents = new Map(
+          players.map((playerId) => [
+            playerId,
+            get(playerIntentsState(playerId)),
+          ])
+        );
+
+        const newPlayersPositions = processTurn(
+          players,
+          playersIntents,
+          playersPositions
+        );
+
+        Array.from(newPlayersPositions).map(([playerId, position]) =>
+          set(playerPositionState(playerId), position)
+        );
+
+        players.forEach((playerId) =>
+          set(playerIntentsState(playerId), (intents) => {
+            if (intents.length === 0) return [];
+            const [_, ...rest] = intents;
+            return rest;
+          })
+        );
+      }
   );
 
-  const players = useRecoilValue(playersState);
-
   useInterval(() => {
-    resetHitPosition();
-    players.forEach(takeTurn);
+    recoilProcessTurn();
   }, 1000);
 };
 
