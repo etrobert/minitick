@@ -13,8 +13,6 @@ const emojis = {
   hit: "💥",
 };
 
-const timer = "⏳";
-
 const PlayerIntents = ({ playerId }: { playerId: PlayerId }) => {
   const playerIntents = useRecoilValue(playerIntentsState(playerId));
 
@@ -32,7 +30,7 @@ const Header = () => {
 
   return (
     <div className="Header">
-      <span className="Timer">{timer}</span>
+      <span className="Timer">⏳</span>
       {players.map((playerId) => (
         <PlayerIntents playerId={playerId} key={playerId} />
       ))}
