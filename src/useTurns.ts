@@ -79,9 +79,7 @@ const useTurns = () => {
       }
   );
 
-  useInterval(() => {
-    recoilProcessTurn();
-  }, turnSpeed);
+  useInterval(recoilProcessTurn, turnSpeed);
 };
 
 export default useTurns;
