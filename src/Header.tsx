@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 import { playerIntentsState, playersState } from "./atoms";
 
 import type { PlayerId } from "./types";
+import "./Header.css";
 
 const emojis = {
   up: "⬆️",
@@ -12,8 +13,11 @@ const emojis = {
   hit: "💥",
 };
 
+const timer = "⏳";
+
 const PlayerIntents = ({ playerId }: { playerId: PlayerId }) => {
   const playerIntents = useRecoilValue(playerIntentsState(playerId));
+
   return (
     <div>
       {`Player ${playerId}: `}
@@ -25,8 +29,10 @@ const PlayerIntents = ({ playerId }: { playerId: PlayerId }) => {
 
 const Header = () => {
   const players = useRecoilValue(playersState);
+
   return (
     <div className="Header">
+      <span className="Timer">{timer}</span>
       {players.map((playerId) => (
         <PlayerIntents playerId={playerId} key={playerId} />
       ))}
